@@ -1,0 +1,23 @@
+name: Docker Registry Cleanup
+
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows#registry_package
+# Run cleanup job if a new package was published or updated
+on:
+  registry_package:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  cleanup_untagged_images:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check for untagged images
+        run: |
+          echo "Hello there"
+          echo "I am cleaning up"
