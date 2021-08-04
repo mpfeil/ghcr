@@ -21,3 +21,11 @@ jobs:
         run: |
           echo "Hello there"
           echo "I am cleaning up"
+
+      - name: GHCR Delete Image
+        uses: bots-house/ghcr-delete-image-action@8ad9844765a47a28ee289f054323f56ebe8fd3e9
+        with:
+          owner: ${{ github.repository_owner }}
+          name: ${{ env.IMAGE_NAME }}
+          token: ${{ secrets.TEST_SECRET }}
+          untagged: all
