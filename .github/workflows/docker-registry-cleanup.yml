@@ -5,10 +5,6 @@ name: Docker Registry Cleanup
 on:
   registry_package:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   fail_purging_semantic:
     runs-on: ubuntu-latest
@@ -16,8 +12,9 @@ jobs:
       - name: clean packages
         uses: MobileheadHolding/github-action-purge-packages@v2.0.1
         with:
-          owner: mpfeil
-          repo: ghcr
+          owner: ${{ github.repository_owner}}
+          repo: ${{ github.event.repository.name }}
           version-regex: 'sha*'
+          days-old: 0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
