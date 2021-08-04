@@ -4,7 +4,6 @@ name: Docker Registry Cleanup
 # Run cleanup job if a new package was published or updated
 on:
   registry_package:
-    types: [published]
 
 env:
   REGISTRY: ghcr.io
