@@ -10,22 +10,14 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  cleanup_untagged_images:
+  fail_purging_semantic:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      - name: Check for untagged images
-        run: |
-          echo "Hello there"
-          echo "I am cleaning up"
-
-      - name: GHCR Delete Image
-        uses: bots-house/ghcr-delete-image-action@8ad9844765a47a28ee289f054323f56ebe8fd3e9
+      - name: clean packages
+        uses: MobileheadHolding/github-action-purge-packages@v2.0.1
         with:
-          owner: ${{ github.repository_owner }}
-          name: ${{ env.IMAGE_NAME }}
-          token: ${{ secrets.TEST_SECRET }}
-          untagged-older-than: 1 # days
+          owner: mpfeil
+          repo: ghcr
+          version-regex: 'sha*'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
