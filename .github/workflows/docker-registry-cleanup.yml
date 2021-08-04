@@ -3,7 +3,8 @@ name: Docker Registry Cleanup
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#registry_package
 # Run cleanup job if a new package was published or updated
 on:
-  registry_package
+  registry_package:
+    types: [published]
 
 env:
   REGISTRY: ghcr.io
