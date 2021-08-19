@@ -18,6 +18,7 @@ jobs:
 
       - run: |
           echo "Checking git log"
+          git remote show origin
           git log --after="6 months ago" > commits.txt
           wc -l <commits.txt
 
@@ -25,6 +26,6 @@ jobs:
       - run: |
           echo "Now using this repo"
           git remote show origin
-      # - uses: JasonEtco/create-an-issue@v2
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
