@@ -1,0 +1,25 @@
+name: Check Watterott senseBox MCU Core for updates
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Check every day
+
+jobs:
+  check-for-updates:
+    name: Check for new commits
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: 'watterott/senseBox-MCU'
+          ref: 'master'
+
+      - run: |
+          echo "Checking git log"
+          git log --after="1 month ago" > commits.txt
+          wc -l <commits.txt
+
+      # - uses: JasonEtco/create-an-issue@v2
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
