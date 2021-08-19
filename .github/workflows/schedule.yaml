@@ -21,7 +21,7 @@ jobs:
           git log --after="6 months ago" > commits.txt
           wc -l <commits.txt
 
-      - uses: actions/checkout@2
+      - uses: actions/checkout@v2
       - run: |
           echo "Now using this repo"
           git remote show origin
