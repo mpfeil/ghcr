@@ -1,8 +1,9 @@
 name: Check Watterott senseBox MCU Core for updates
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'  # Check every day
+    - cron: '*/2 * * * *'  # Check every day
 
 jobs:
   check-for-updates:
