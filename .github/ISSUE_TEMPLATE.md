@@ -1,6 +1,5 @@
 ---
-title: Someone just pushed
+title: New commits in Watterotts senseBox MCU repository
 assignees: mpfeil
-labels: bug
+labels: info
 ---
-Someone just pushed, oh no! Here's who did it: {{ payload.sender.login }}
