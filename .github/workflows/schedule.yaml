@@ -18,7 +18,7 @@ jobs:
 
       - run: |
           echo "Checking git log"
-          git log --after="1 month ago" > commits.txt
+          git log --after="6 months ago" > commits.txt
           wc -l <commits.txt
 
       # - uses: JasonEtco/create-an-issue@v2
