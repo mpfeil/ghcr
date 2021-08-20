@@ -16,16 +16,21 @@ jobs:
           repository: 'watterott/senseBox-MCU'
           ref: 'master'
 
-      - run: |
+      - name: Check for new commits
+        id: check_commits
+        run: |
           echo "Checking git log"
+          commits=false
           git remote show origin
-          git log --after="6 months ago" > commits.txt
+          git shortlog -s --after="yesterday" --before="today" > commits.txt
           wc -l <commits.txt
+          if [[ $(wc -l <commits.txt) -ge 1 ]]
+          then
+            echo "[set-output name=commits;true]"
+          fi
+          echo $commits
 
-      - uses: actions/checkout@v2
-      - run: |
-          echo "Now using this repo"
-          git remote show origin
       - uses: JasonEtco/create-an-issue@v2
+        if: ${{ steps.check_commits.outputs.commits }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
